@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMario", "SuperMario\SuperMario.csproj", "{916676BD-88CA-4AF0-A339-2D7A7A36F3EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{916676BD-88CA-4AF0-A339-2D7A7A36F3EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{916676BD-88CA-4AF0-A339-2D7A7A36F3EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{916676BD-88CA-4AF0-A339-2D7A7A36F3EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{916676BD-88CA-4AF0-A339-2D7A7A36F3EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
