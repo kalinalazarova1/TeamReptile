@@ -3,7 +3,8 @@
 <head>
     <title>Super Mario</title>
     <link href="Style/MarioStyle.css" rel="stylesheet" />
-    <script src="kinetic.min.js"></script>
+    <script src="Lib/countdown.min.js"></script>
+    <script src="Lib/kinetic.min.js"></script>
 </head>
 <body>
     <!--We need svg tag <foreignobject> if we want to use svg and canvas together-->
@@ -73,7 +74,7 @@
                     mario.animation('stay');
                     frameCount = 0;
                 }
-                else if ((mario.animation() === 'jump') && ++frameCount > 2){
+                else if ((mario.animation() === 'jump') && ++frameCount > 2) {
                     mario.animation('stay');
                     frameCount = 0;
                 }
@@ -93,6 +94,45 @@
 
         };
         imageObj.src = 'Images/mario1.png';
+
+        //timer
+        var totalTimerPerLevel = 999;
+	
+        var remainingTime = totalTimerPerLevel;
+        var timeTextLayer = new Kinetic.Layer();
+
+        var staticTimeString = new Kinetic.Text({
+            x: 710,
+            y: 10,
+            text: "TIME",
+            fontSize: 20,
+            fontFamily: 'Arial Black',
+            fill: 'white'
+        });
+        timeTextLayer.add(staticTimeString);
+
+        var timeText = new Kinetic.Text({
+            x: 723,
+            y: 30,
+            text: remainingTime,
+            fontSize: 20,
+            fontFamily: 'Arial Black',
+            fill: 'white'
+        });
+        timeTextLayer.add(timeText);
+
+        stage.add(timeTextLayer);
+
+        setInterval(function () {
+            if (totalTimerPerLevel<=0) {
+                //TODO: Call no time left screen
+            }
+            else {
+                remainingTime--;
+                timeText.setText(remainingTime);
+                timeTextLayer.draw();
+            }
+        }, 1000);
 
     </script>
 </body>
