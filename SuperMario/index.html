@@ -2,10 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Super Mario</title>
+    <link href="Style/MarioStyle.css" rel="stylesheet" />
     <script src="kinetic.min.js"></script>
 </head>
 <body>
-    <div id="container"></div>
+    <!--We need svg tag <foreignobject> if we want to use svg and canvas together-->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         width="800" height="600">
+        <title>markup for Canvas in SVG</title>
+        <foreignObject width="800" height="600">
+            <xhtml:canvas width="800" height="00" id="container">
+                alternate content for browsers that do not support Canvas
+            </xhtml:canvas>
+        </foreignObject>
+        <image id="background"
+               width="800" height="600"
+               x="0" y="0"
+               xlink:href="Images/042.jpg"
+               alt="NASA Photo of Jupiter" />
+    </svg>
+
     <audio controls autoplay loop>
         <source src="Sounds/Overworld.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
@@ -14,8 +31,8 @@
     <script>
         var stage = new Kinetic.Stage({
             container: 'container',
-            width:1280,
-            height: 800
+            width: 800,
+            height: 600
         });
         var layer = new Kinetic.Layer();
 
@@ -23,7 +40,7 @@
         imageObj.onload = function () {
             var mario = new Kinetic.Sprite({
                 x: 10,
-                y: 100,
+                y: 390,
                 image: imageObj,
                 animation: 'stay',
                 animations: {
@@ -36,7 +53,7 @@
                         0, 0, 50, 150
                     ],
                     jump: [
-                        100, 0, 50, 150
+                        100, 70, 50, 150
                     ]
                 },
                 frameRate: 7,
@@ -65,13 +82,13 @@
             document.body.addEventListener('keydown', function (ev) {
                 if (ev.keyCode === 39) {
                     mario.animation('walk');
-                } else if(ev.keyCode === 38) {
+                } else if (ev.keyCode === 38) {
                     mario.animation('jump');
                 }
             }, false);
-            
+
         };
-        imageObj.src = 'mario1.png';
+        imageObj.src = 'Images/mario1.png';
 
     </script>
 </body>

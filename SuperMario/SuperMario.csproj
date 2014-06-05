@@ -65,9 +65,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\042.jpg" />
+    <Content Include="Images\mario1.png" />
     <Content Include="index.html" />
     <Content Include="kinetic.min.js" />
     <Content Include="Sounds\Overworld.mp3" />
+    <Content Include="Style\MarioStyle.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
