@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\042.jpg" />
+    <Content Include="Images\background.jpg" />
+    <Content Include="Images\background2.png" />
     <Content Include="Images\mario1.png" />
     <Content Include="index.html" />
     <Content Include="kinetic.min.js" />

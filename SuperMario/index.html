@@ -7,20 +7,14 @@
 </head>
 <body>
     <!--We need svg tag <foreignobject> if we want to use svg and canvas together-->
-    <svg xmlns="http://www.w3.org/2000/svg"
-         xmlns:xhtml="http://www.w3.org/1999/xhtml"
-         width="800" height="600">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml" width="1000" height="600">
         <title>markup for Canvas in SVG</title>
-        <foreignObject width="800" height="600">
-            <xhtml:canvas width="800" height="00" id="container">
-                alternate content for browsers that do not support Canvas
+        <image id="background" width="1600" height="600" x="0" y="0" xlink:href="Images/background.jpg" />
+        <foreignObject width="1000" height="600">
+            <xhtml:canvas width="1000" height="600" id="container">
+                Your browser does not support canvas
             </xhtml:canvas>
         </foreignObject>
-        <image id="background"
-               width="800" height="600"
-               x="0" y="0"
-               xlink:href="Images/042.jpg"
-               alt="NASA Photo of Jupiter" />
     </svg>
 
     <audio controls autoplay loop>
@@ -31,9 +25,24 @@
     <script>
         var stage = new Kinetic.Stage({
             container: 'container',
-            width: 800,
+            width: 1000,
             height: 600
         });
+        
+        var backgroundLayer = new Kinetic.Layer();
+        var backgroundImage = new Image();
+        backgroundImage.onload = function () {
+            var bg = new Kinetic.Image({
+                x: 0,
+                y: -28,
+                image: backgroundImage
+            });
+            backgroundLayer.add(bg);
+            stage.add(backgroundLayer);
+        };
+        backgroundImage.src = 'Images/background2.png';
+        
+
         var layer = new Kinetic.Layer();
 
         var imageObj = new Image();

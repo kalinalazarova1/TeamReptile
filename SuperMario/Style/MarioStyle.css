@@ -1,5 +1,9 @@
 ﻿svg {
-    border: 3px solid #000000;    
+    border: 3px solid #000000;  
+}
+
+svg image {
+    /*opacity:0.4;*/
 }
 
 audio {
