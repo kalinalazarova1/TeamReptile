@@ -36,10 +36,27 @@
             var bg = new Kinetic.Image({
                 x: 0,
                 y: -28,
-                image: backgroundImage
+                image: backgroundImage,
+                aminations: {
+                    move: [
+                        0, -28, 800, 600,
+                        50, -28, 800, 600
+                    ]
+                },
+                frameRate: 7,
+                frameIndex:0
             });
             backgroundLayer.add(bg);
             stage.add(backgroundLayer);
+
+            function onKeyDown(ev) {
+                if (ev.keyCode === 39) {
+                    bg.animation('move');
+                }
+            }
+
+            document.body.addEventListener('keydown', onKeyDown, false);
+
         };
         backgroundImage.src = 'Images/background2.png';
         
