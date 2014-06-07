@@ -1,11 +1,12 @@
-﻿svg {
-    border: 3px solid #000000;  
+﻿body {
+    background: #8bcaee;
+}
+svg {
+    border: 3px solid #000000; 
+    display: block;
+    margin: auto;
 }
 
-svg image {
-    /*opacity:0.4;*/
-}
-
-audio {
-    display: none;
-}
+    svg image {
+        /*opacity:0.4;*/
+    }
