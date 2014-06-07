@@ -1,5 +1,5 @@
 ﻿var marioLayer = new Kinetic.Layer();
-
+var canvas = document.getElementById('container');
 var marioImageObj = new Image();
 marioImageObj.onload = function () {
     var mario = new Kinetic.Sprite({
@@ -34,23 +34,29 @@ marioImageObj.onload = function () {
 
     mario.on('frameIndexChange', function (evt) {
         if ((mario.animation() === 'walk') && ++frameCount > 2) {
+            mario.move({
+                x: 10,
+                y: 0
+            });
             mario.animation('stay');
             frameCount = 0;
         }
         else if ((mario.animation() === 'jump') && ++frameCount > 2) {
+            mario.move({
+                x: 30,
+                y: 0
+            });
             mario.animation('stay');
             frameCount = 0;
         }
     });
 
     function onKeyDown(ev) {
-        if (ev.keyCode === 39) {
+        if (ev.keyCode === 39 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('walk');
-        } else if (ev.keyCode === 38) {
+        } else if (ev.keyCode === 38 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('jump');
-        } else if (ev.keyCode === 40) {
-            mario.animation('stay');
-        }
+        } 
     }
 
     document.body.addEventListener('keydown', onKeyDown, false);
