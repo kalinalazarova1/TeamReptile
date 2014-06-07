@@ -5,6 +5,8 @@
     <link href="Style/MarioStyle.css" rel="stylesheet" />
     <script src="Lib/countdown.min.js"></script>
     <script src="Lib/kinetic.min.js"></script>
+    
+
 </head>
 <body>
     <!--We need svg tag <foreignobject> if we want to use svg and canvas together.-->
@@ -23,142 +25,8 @@
         Your browser does not support the audio element.
     </audio>
 
-    <script>
-        var stage = new Kinetic.Stage({
-            container: 'container',
-            width: 1000,
-            height: 600
-        });
-        
-        var backgroundLayer = new Kinetic.Layer();
-        var backgroundImage = new Image();
-        backgroundImage.onload = function () {
-            var bg = new Kinetic.Image({
-                x: 0,
-                y: -28,
-                image: backgroundImage,
-                aminations: {
-                    move: [
-                        0, -28, 800, 600,
-                        50, -28, 800, 600
-                    ]
-                },
-                frameRate: 7,
-                frameIndex:0
-            });
-            backgroundLayer.add(bg);
-            stage.add(backgroundLayer); 
-
-            function onKeyDown(ev) {
-                if (ev.keyCode === 39) {
-                    bg.animation('move');
-                }
-            }
-
-            document.body.addEventListener('keydown', onKeyDown, false);
-
-        };
-        backgroundImage.src = 'Images/background2.png';
-        
-
-        var layer = new Kinetic.Layer();
-
-        var imageObj = new Image();
-        imageObj.onload = function () {
-            var mario = new Kinetic.Sprite({
-                x: 10,
-                y: 390,
-                image: imageObj,
-                animation: 'stay',
-                animations: {
-                    walk: [
-                      // x, y, width, height (2 frames)
-                      0, 0, 50, 150,
-                      50, 0, 50, 150
-                    ],
-                    stay: [
-                        0, 0, 50, 150
-                    ],
-                    jump: [
-                        100, 70, 50, 150
-                    ]
-                },
-                frameRate: 7,
-                frameIndex: 0
-            });
-
-            layer.add(mario);
-
-            stage.add(layer);
-
-            mario.start();
-
-            var frameCount = 0;
-
-            mario.on('frameIndexChange', function (evt) {
-                if ((mario.animation() === 'walk') && ++frameCount > 2) {
-                    mario.animation('stay');
-                    frameCount = 0;
-                }
-                else if ((mario.animation() === 'jump') && ++frameCount > 2) {
-                    mario.animation('stay');
-                    frameCount = 0;
-                }
-            });
-
-            function onKeyDown(ev) {
-                if (ev.keyCode === 39) {
-                    mario.animation('walk');
-                } else if (ev.keyCode === 38) {
-                    mario.animation('jump');
-                } else if (ev.keyCode === 40) {
-                    mario.animation('stay');
-                }
-            }
-
-            document.body.addEventListener('keydown', onKeyDown, false);
-
-        };
-        imageObj.src = 'Images/mario1.png';
-
-        //timer
-        var totalTimerPerLevel = 999;
-	
-        var remainingTime = totalTimerPerLevel;
-        var timeTextLayer = new Kinetic.Layer();
-
-        var staticTimeString = new Kinetic.Text({
-            x: 710,
-            y: 10,
-            text: "TIME",
-            fontSize: 20,
-            fontFamily: 'Arial Black',
-            fill: 'white'
-        });
-        timeTextLayer.add(staticTimeString);
-
-        var timeText = new Kinetic.Text({
-            x: 723,
-            y: 30,
-            text: remainingTime,
-            fontSize: 20,
-            fontFamily: 'Arial Black',
-            fill: 'white'
-        });
-        timeTextLayer.add(timeText);
-
-        stage.add(timeTextLayer);
-
-        setInterval(function () {
-            if (totalTimerPerLevel<=0) {
-                //TODO: Call no time left screen
-            }
-            else {
-                remainingTime--;
-                timeText.setText(remainingTime);
-                timeTextLayer.draw();
-            }
-        }, 1000);
-    </script>
+    <script src="js/init.js"></script>
+    <script src="js/mario.js"></script>
+    <script src="js/timer.js"></script>
 </body>
 </html>
