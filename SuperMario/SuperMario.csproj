@@ -65,7 +65,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\game-objects\bonus-block.gif" />
+    <Content Include="Images\game-objects\single-block.gif" />
+    <Content Include="Images\game-objects\stairs.jpg" />
+    <Content Include="Images\game-objects\static-block.gif" />
     <Content Include="Images\grass.png" />
+    <Content Include="js\game-objects.js" />
+    <Content Include="js\init.js" />
+    <Content Include="js\mario.js" />
+    <Content Include="js\timer.js" />
     <Content Include="Lib\countdown.min.js" />
     <Content Include="Images\042.jpg" />
     <Content Include="Images\background.jpg" />
