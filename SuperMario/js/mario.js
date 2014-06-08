@@ -84,7 +84,7 @@ marioImageObj.onload = function () {
     var frameCount = 0;
 
     mario.on('frameIndexChange', function (evt) {
-        if (!isElevated && elevation != 0) {
+        if (!isElevated && elevation != 0 && !nextIsFlat()) {
             mario.move({
                 x: 32,
                 y: 32 * elevation
@@ -134,6 +134,14 @@ marioImageObj.onload = function () {
     function nextIsHigher() {  // if next to mario is higher obstacle
         return gameObjects.some(function (o) {
             return (o.y + 32 - mario.getAttr('y') - 150) === 0 && // bottom of mario equal to bottom of obstacle
+                mario.getAttr('x') + 32 + 50 >= o.x &&      // right side of mario compared to left side of obstacle
+                mario.getAttr('x') + 32 < o.x + o.width - 5 // left side of mario compared to right side of obstacle
+        });
+    }
+
+    function nextIsFlat() {  // if next to mario is higher obstacle
+        return gameObjects.some(function (o) {
+            return (o.y - mario.getAttr('y') - 150) === 0 && // bottom of mario equal to top of obstacle
                 mario.getAttr('x') + 32 + 50 >= o.x &&      // right side of mario compared to left side of obstacle
                 mario.getAttr('x') + 32 < o.x + o.width - 5 // left side of mario compared to right side of obstacle
         });
