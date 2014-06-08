@@ -3,12 +3,13 @@
 function loadImages(sources, callback) {
     var images = {};
     var loadedImages = 0;
-    var numImages = 0;
-    for (var src in sources) {
+    var numImages = 0,
+        src;
+    for (src in sources) {
         numImages++;
     }
 
-    for (var src in sources) {
+    for (src in sources) {
         images[src] = new Image();
         images[src].onload = function () {
             if (++loadedImages >= numImages) {
@@ -40,7 +41,7 @@ function buildStage(images) {
                                                     animation:
                                                     'blink',
                                                     animations: {
-                                                        blink:[
+                                                        blink: [
                                                                 // x, y, width, height (2 frames)
                                                                 0, 0, 32, 32,
                                                                 32, 0, 32, 32,
