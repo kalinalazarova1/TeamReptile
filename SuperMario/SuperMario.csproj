@@ -74,6 +74,7 @@
     <Content Include="js\game-objects-coords.js" />
     <Content Include="js\game-objects.js" />
     <Content Include="js\init.js" />
+    <Content Include="js\lives.js" />
     <Content Include="js\mario.js" />
     <Content Include="js\timer.js" />
     <Content Include="Lib\countdown.min.js" />
