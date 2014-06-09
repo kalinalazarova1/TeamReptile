@@ -44,7 +44,7 @@ enemyImageObj.onload = function () {
             }
             if (mushroom.getAttr('x') < boundary) {
                 mushroom.move({
-                    x: 10
+                    x: 5
                 })
                 if (mushroom.getAttr('x') === boundary - 10) {
                     boundary = 0;
@@ -54,7 +54,7 @@ enemyImageObj.onload = function () {
                 }
             } else {
                 mushroom.move({
-                    x: -10
+                    x: -5
                 })
                 if (mushroom.getAttr('x') === boundary + 10) {
                     boundary = 700;
@@ -67,7 +67,7 @@ enemyImageObj.onload = function () {
                 isPassed = true;
             }
 
-        }, 300)
+        }, 50)
     }
 };
 enemyImageObj.src = 'Images/mushroom-new.png';
