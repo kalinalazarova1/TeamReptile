@@ -140,9 +140,10 @@ marioImageObj.onload = function () {
                     if (mario.getAttr('y') - gameObjects[k].y + 32 < 105 &&
                         Math.abs(mario.getAttr('x') + 25 - gameObjects[k].x) < 16 &&
                         gameObjects[k].type === 'bonusBlock') {
+
                         bonusAnimation(gameObjects[k].x, gameObjects[k].y);
                         console.log('hit bonus!');
-                        //bonusAnimation(gameObjects[k].x, 32);                                                        // TODO: Write a function to modify the behaviour of the hit bonus block
+                                                        // TODO: Write a function to modify the behaviour of the hit bonus block
                     }                                   // TODO: Add coins and scoring - calculation and display
                 }                                       // TODO: Save 5 best scores starting and closing texts
             }
