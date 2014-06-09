@@ -1,8 +1,9 @@
 ﻿var marioLayer = new Kinetic.Layer();
 var canvas = document.getElementById('container');
+var mario;
 var marioImageObj = new Image();
 marioImageObj.onload = function () {
-    var mario = new Kinetic.Sprite({
+    mario = new Kinetic.Sprite({
         x: 10,
         y: 388,
         image: marioImageObj,
@@ -152,9 +153,9 @@ marioImageObj.onload = function () {
         }
                                                         // TODO: Make the mushroom move left and right 
         if (mario.getAttr('x') + 50 >= mushroom.getAttr('x') &&
-            mario.getAttr('x') + 40 < mushroom.getAttr('x') &&
+            mario.getAttr('x') + 20 < mushroom.getAttr('x') &&
             (mario.animation() === 'jump' || mario.animation() === 'bigjump')) {
-            console.log('Smashed mushroom!')            // TODO: Write a function to modify the behaviour of smashed mushroom
+            mushroom.animation('smashed');            // TODO: Write a function to modify the behaviour of smashed mushroom
         } else if (mario.getAttr('x') + 50 >= mushroom.getAttr('x') &&
             mario.getAttr('x') + 40 < mushroom.getAttr('x') &&
             !(mario.animation() === 'jump' || mario.animation() === 'bigjump')) {
