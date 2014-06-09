@@ -70,6 +70,8 @@
     <Content Include="Images\game-objects\stairs.png" />
     <Content Include="Images\game-objects\static-block.gif" />
     <Content Include="Images\grass.png" />
+    <Content Include="Images\screens\screen-game-over.png" />
+    <Content Include="Images\screens\screen-start.png" />
     <Content Include="js\enemies.js" />
     <Content Include="js\game-objects-coords.js" />
     <Content Include="js\game-objects.js" />
