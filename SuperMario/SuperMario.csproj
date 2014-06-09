@@ -73,6 +73,7 @@
     <Content Include="Images\mushroom-new.png" />
     <Content Include="Images\screens\screen-game-over.png" />
     <Content Include="Images\screens\screen-start.png" />
+    <Content Include="js\Clouds.js" />
     <Content Include="js\enemies.js" />
     <Content Include="js\game-objects-coords.js" />
     <Content Include="js\game-objects.js" />
@@ -86,6 +87,7 @@
     <Content Include="Images\mario1.png" />
     <Content Include="index.html" />
     <Content Include="Lib\kinetic.min.js" />
+    <Content Include="Lib\raphael-min.js" />
     <Content Include="Sounds\Overworld.mp3" />
     <Content Include="Style\MarioStyle.css" />
     <Content Include="Web.config" />

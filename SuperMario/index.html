@@ -5,12 +5,12 @@
     <link href="Style/MarioStyle.css" rel="stylesheet" />
     <script src="Lib/countdown.min.js"></script>
     <script src="Lib/kinetic.min.js"></script>
+    <script src="Lib/raphael-min.js"></script>
 </head>
 <body>
     <!--We need svg tag <foreignobject> if we want to use svg and canvas together.-->
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml" width="1000" height="600">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml" width="1000" height="600" id="svg-container">
         <title>markup for Canvas in SVG</title>
-        <image id="background" width="1600" height="600" x="0" y="0" xlink:href="Images/background.jpg" />
         <foreignObject width="1000" height="600">
             <xhtml:canvas width="1000" height="600" id="container">
                 Your browser does not support canvas
@@ -32,5 +32,6 @@
     <script src="js/game-objects.js"></script>
     <script src="js/mario.js"></script>
     <script src="js/enemies.js"></script>
+    <script src="js/Clouds.js"></script>
 </body>
 </html>
