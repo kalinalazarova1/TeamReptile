@@ -1,61 +1,4 @@
-﻿var gameObjects = [{
-    type: 'singleBlock',
-    x: 200,
-    y: 400,
-    width: 32,
-    height: 32
-}, {
-    type: 'bonusBlock',
-    x: 232,
-    y: 400,
-    width: 32,
-    height: 32
-}, {
-    type: 'singleBlock',
-    x: 264,
-    y: 400,
-    width: 32,
-    height: 32
-}, {
-    type: 'staticBlock',
-    x: 750 - 32,
-    y: 410 + 32 * 3,
-    width: 32,
-    height: 32
-}, {
-    type: 'staticBlock',
-    x: 782 - 32,
-    y: 378 + 32 * 3,
-    width: 32,
-    height: 32
-}, {
-    type: 'staticBlock',
-    x: 814 - 32,
-    y: 346 + 32 * 3,
-    width: 32,
-    height: 32
-}, {
-    type: 'staticBlock',
-    x: 846 - 32,
-    y: 314 + 32 * 3,
-    width: 32,
-    height: 32
-}, {
-    type: 'staticBlock',
-    x: 846,
-    y: 314 + 32 * 3,
-    width: 32,
-    height: 32
-}, {
-    type: 'staticBlock',
-    x: 846 + 32,
-    y: 314 + 32 * 4,
-    width: 32,
-    height: 32
-}
-];
-
-var marioLayer = new Kinetic.Layer();
+﻿var marioLayer = new Kinetic.Layer();
 var canvas = document.getElementById('container');
 var marioImageObj = new Image();
 marioImageObj.onload = function () {
@@ -197,7 +140,9 @@ marioImageObj.onload = function () {
                     if (mario.getAttr('y') - gameObjects[k].y + 32 < 105 &&
                         Math.abs(mario.getAttr('x') + 25 - gameObjects[k].x) < 16 &&
                         gameObjects[k].type === 'bonusBlock') {
-                        console.log('hit bonus!');      // TODO: Write a function to modify the behaviour of the hit bonus block
+                        bonusAnimation(gameObjects[k].x, gameObjects[k].y);
+                        console.log('hit bonus!');
+                        //bonusAnimation(gameObjects[k].x, 32);                                                        // TODO: Write a function to modify the behaviour of the hit bonus block
                     }                                   // TODO: Add coins and scoring - calculation and display
                 }                                       // TODO: Save 5 best scores starting and closing texts
             }
@@ -220,3 +165,31 @@ marioImageObj.onload = function () {
 
 };
 marioImageObj.src = 'Images/mario1.png';
+
+function bonusAnimation(bonusX, bonusY) {
+    var coinsLayer = new Kinetic.Layer();
+    var coinImage = new Image();
+    coinImage.src = 'Images/game-objects/coin.png';
+    var coin = new Kinetic.Sprite({
+        x: bonusX+8,
+        y: bonusY - 32,
+        image: coinImage,
+        animation:
+        'rotate',
+        animations: {
+            rotate: [
+                    // x, y, width, height (2 frames)
+                    0, 0, 20, 20,
+                    25, 0, 20, 20,
+                    45, 0, 20, 20,
+                    65, 0, 20, 20
+            ]
+        },
+        frameRate: 4,
+        frameIndex: 0
+    });
+    
+    coinsLayer.add(coin);
+    coin.start();
+    stage.add(coinsLayer);
+}

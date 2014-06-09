@@ -63,11 +63,11 @@ function buildStage(images) {
             gameObjectsLayer.add(staticBlock);
         }
 
-        if (currentObj.type === 'stairs') {
+        if (currentObj.type === 'stairsBlock') {
             var stairs = new Kinetic.Image({
                                                x: currentObj.x,
                                                y: currentObj.y,
-                                               image: images.stairs
+                                               image: images.stairsBlock
                                            });
             gameObjectsLayer.add(stairs);
         }
@@ -80,7 +80,8 @@ var sources = {
     singleBlock: 'Images/game-objects/single-block.gif',
     bonusBlock: 'Images/game-objects/bonus-block.png',
     staticBlock: 'Images/game-objects/static-block.gif',
-    stairs: 'Images/game-objects/stairs.png'
+    stairsBlock: 'Images/game-objects/stairsBlock.png'
 };
 
 loadImages(sources, buildStage);
+
