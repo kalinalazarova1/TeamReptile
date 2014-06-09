@@ -1,9 +1,9 @@
 ﻿var enemyLayer = new Kinetic.Layer();
-
+var mushroom;
 var enemyImageObj = new Image();
 enemyImageObj.onload = function () {
-    var mushroom = new Kinetic.Sprite({
-        x: 960,
+    mushroom = new Kinetic.Sprite({
+        x: 550,
         y: 512,
         image: enemyImageObj,
         animation: 'stay',
