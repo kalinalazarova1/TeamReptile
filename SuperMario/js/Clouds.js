@@ -6,7 +6,7 @@ var header_clouds = new Array();
 var is_cloud_active = new Array();
 ////this is the drawing area.
 //this is optional, but it's a background object for decoration.
-var skyline = paper.image("../Images/background.jpg", 0, 0, 1600, 600);
+var skyline = paper.image("Images/background.jpg", 0, 0, 1600, 600);
 
 function spawn_cloud(cloud_no) {
     var randomY = Math.round(((Math.random() * 180) + 1) * 1000) / 1000;

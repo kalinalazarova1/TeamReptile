@@ -152,7 +152,7 @@
     },
     {
         type: 'singleBlock',
-        x: 500 - 32*2,
+        x: 500 - 32 * 2,
         y: 400,
         width: 32,
         height: 32

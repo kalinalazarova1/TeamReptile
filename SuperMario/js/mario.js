@@ -2,6 +2,7 @@
 var canvas = document.getElementById('container');
 var mario;
 var marioImageObj = new Image();
+
 marioImageObj.onload = function () {
     mario = new Kinetic.Sprite({
         x: 10,
@@ -50,7 +51,7 @@ marioImageObj.onload = function () {
                     y: next.y - mario.getAttr('y') - 150
                 });
                 elevation -= (mario.getAttr('y') - old) / 32;
-            } else {        // if nexto to mario there is no obstacle
+            } else {        // if next to mario there is no obstacle
                 mario.move({
                     x: 10,
                     y: 32 * elevation
@@ -81,6 +82,8 @@ marioImageObj.onload = function () {
             } 
             mario.animation('stay');
             frameCount = 0;
+            console.log(mario.getAttr('x'));
+            console.log(mario.getAttr('y'));
         }
     });
 
@@ -139,7 +142,7 @@ marioImageObj.onload = function () {
                     return;
                 } else if (mario.animation() === 'bigjump') {
                     if (mario.getAttr('y') - gameObjects[k].y + 32 < 105 &&
-                        Math.abs(mario.getAttr('x') + 25 - gameObjects[k].x) < 16 &&
+                        Math.abs(mario.getAttr('x') + 25 - gameObjects[k].x) - 16 < 16 &&
                         gameObjects[k].type === 'bonusBlock') {
 
                         bonusAnimation(gameObjects[k].x, gameObjects[k].y);
@@ -157,7 +160,7 @@ marioImageObj.onload = function () {
             (mario.animation() === 'jump' || mario.animation() === 'bigjump')) {
             mushroom.animation('smashed');            // TODO: Write a function to modify the behaviour of smashed mushroom
         } else if (mario.getAttr('x') + 50 >= mushroom.getAttr('x') &&
-            mario.getAttr('x') + 40 < mushroom.getAttr('x') &&
+            mario.getAttr('x') + 30 < mushroom.getAttr('x') &&
             !(mario.animation() === 'jump' || mario.animation() === 'bigjump')) {
             console.log('Mario is eaten!');             // TODO: Write a function to reduce the lifes of Mario and modify the behaviour of Mario
         }
