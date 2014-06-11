@@ -167,7 +167,7 @@
     {
         type: 'staticBlock',
         x: 360,
-        y: 505,
+        y: 506,
         width: 32,
         height: 32
     }
