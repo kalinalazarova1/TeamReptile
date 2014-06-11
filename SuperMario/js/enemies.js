@@ -1,7 +1,8 @@
 ﻿var enemyLayer = new Kinetic.Layer(),
     firstMushroom,
     SecondMushroom,
-    imageSrc = 'Images/mushroom-new.png';
+    imageSrc = 'Images/mushroom-new.png',
+    enemies = [];
 
 var firstMushroomImage = new Image();
 var SecondMushroomImage = new Image();
@@ -26,6 +27,8 @@ firstMushroomImage.onload = function () {
         frameIndex: 0
     });
     
+    enemies.push(firstMushroom);
+
     // add the shape to the layer
     enemyLayer.add(firstMushroom);
 
@@ -58,6 +61,8 @@ SecondMushroomImage.onload = function () {
         frameRate: 7,
         frameIndex: 0
     });
+
+    enemies.push[SecondMushroom];
 
     // add the shape to the layer
     enemyLayer.add(SecondMushroom);
@@ -107,18 +112,4 @@ function Move(mushroom, startBorder, endBorder) {
         }
     }, 50)
 }
-
-var enemies = [{
-    type: 'firstMushroom',
-    x: 550,
-    y: 512,
-    widht: 28,
-    height: 29
-}, {
-    type: 'SecondMushroom',
-    x: 440,
-    y: 512,
-    widht: 28,
-    height: 29
-}]
 
