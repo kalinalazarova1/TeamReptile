@@ -164,5 +164,12 @@
         width: 32,
         height: 32
     },
+    {
+        type: 'staticBlock',
+        x: 360,
+        y: 505,
+        width: 32,
+        height: 32
+    }
     
 ];
