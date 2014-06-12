@@ -26,49 +26,49 @@ function buildStage(images) {
 
         if (currentObj.type === 'singleBlock') {
             var singleBlock = new Kinetic.Image({
-                                                    x: currentObj.x,
-                                                    y: currentObj.y,
-                                                    image: images.singleBlock
-                                                });
+                x: currentObj.x,
+                y: currentObj.y,
+                image: images.singleBlock
+            });
             gameObjectsLayer.add(singleBlock);
         }
 
         if (currentObj.type === 'bonusBlock') {
             var bonusBlock = new Kinetic.Sprite({
-                                                    x: currentObj.x,
-                                                    y: currentObj.y,
-                                                    image: images.bonusBlock,
-                                                    animation:
-                                                    'blink',
-                                                    animations: {
-                                                        blink: [
-                                                                // x, y, width, height (2 frames)
-                                                                0, 0, 32, 32,
-                                                                32, 0, 32, 32,
-                                                            ]
-                                                    },
-                                                    frameRate: 3,
-                                                    frameIndex: 0
-                                                });
+                x: currentObj.x,
+                y: currentObj.y,
+                image: images.bonusBlock,
+                animation:
+                'blink',
+                animations: {
+                    blink: [
+                            // x, y, width, height (2 frames)
+                            0, 0, 32, 32,
+                            32, 0, 32, 32,
+                    ]
+                },
+                frameRate: 3,
+                frameIndex: 0
+            });
             gameObjectsLayer.add(bonusBlock);
             bonusBlock.start();
         }
 
         if (currentObj.type === 'staticBlock') {
             var staticBlock = new Kinetic.Image({
-                                                    x: currentObj.x,
-                                                    y: currentObj.y,
-                                                    image: images.staticBlock
-                                                });
+                x: currentObj.x,
+                y: currentObj.y,
+                image: images.staticBlock
+            });
             gameObjectsLayer.add(staticBlock);
         }
 
         if (currentObj.type === 'stairsBlock') {
             var stairs = new Kinetic.Image({
-                                               x: currentObj.x,
-                                               y: currentObj.y,
-                                               image: images.stairsBlock
-                                           });
+                x: currentObj.x,
+                y: currentObj.y,
+                image: images.stairsBlock
+            });
             gameObjectsLayer.add(stairs);
         }
     }
