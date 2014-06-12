@@ -9,7 +9,7 @@
     var grassImage = new Image();
     grassImage.onload = function () {
         var grass = new Kinetic.Image({
-            x: 0,
+            x: 4,
             y: -31,
             image: grassImage
         });
