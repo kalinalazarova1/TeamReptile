@@ -62,7 +62,7 @@ SecondMushroomImage.onload = function () {
         frameIndex: 0
     });
 
-    enemies.push[SecondMushroom];
+    enemies.push(SecondMushroom);
 
     // add the shape to the layer
     enemyLayer.add(SecondMushroom);
