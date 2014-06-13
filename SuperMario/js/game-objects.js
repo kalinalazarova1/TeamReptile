@@ -71,6 +71,33 @@ function buildStage(images) {
             });
             gameObjectsLayer.add(stairs);
         }
+
+        if (currentObj.type === 'pipeSmall') {
+            var pipeSmall = new Kinetic.Image({
+                x: currentObj.x,
+                y: currentObj.y,
+                image: images.pipeSmall
+            });
+            gameObjectsLayer.add(pipeSmall);
+        }
+
+        if (currentObj.type === 'pipeBig') {
+            var pipeBig = new Kinetic.Image({
+                x: currentObj.x,
+                y: currentObj.y,
+                image: images.pipeBig
+            });
+            gameObjectsLayer.add(pipeBig);
+        }
+
+        if (currentObj.type === 'endLevel') {
+            var endLevel = new Kinetic.Image({
+                x: currentObj.x,
+                y: currentObj.y,
+                image: images.endLevel
+            });
+            gameObjectsLayer.add(endLevel);
+        }
     }
 
     stage.add(gameObjectsLayer);
@@ -80,7 +107,10 @@ var sources = {
     singleBlock: 'Images/game-objects/single-block.gif',
     bonusBlock: 'Images/game-objects/bonus-block.png',
     staticBlock: 'Images/game-objects/static-block.gif',
-    stairsBlock: 'Images/game-objects/stairsBlock.png'
+    stairsBlock: 'Images/game-objects/stairsBlock.png',
+    pipeSmall: 'Images/game-objects/pipe-small.png',
+    pipeBig: 'Images/game-objects/pipe-big.png',
+    endLevel: 'Images/game-objects/end-level.png'
 };
 
 loadImages(sources, buildStage);
