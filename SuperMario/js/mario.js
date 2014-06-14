@@ -94,13 +94,19 @@ marioImageObj.onload = function () {
                 x: 32,
                 y: 0
             });
-            if (isElevated) {
+            if (isElevated && nextIsTube()) {
+                mario.move({
+                    x: 0,
+                    y: -64
+                });
+                elevation += 2;
+            } else if (isElevated) {
                 mario.move({
                     x: 0,
                     y: -32
                 });
                 elevation++;
-            } 
+            }
             mario.animation('stayRight');
             frameCount = 0;
             console.log(mario.getAttr('x'));
@@ -110,7 +116,13 @@ marioImageObj.onload = function () {
                 x: -32,
                 y: 0
             });
-            if (isElevated) {
+            if (isElevated && nextIsTube()) {
+                mario.move({
+                    x: 0,
+                    y: -64
+                });
+                elevation += 2;
+            } else if (isElevated) {
                 mario.move({
                     x: 0,
                     y: -32
@@ -153,9 +165,19 @@ marioImageObj.onload = function () {
     function nextIsHigher() {  // if next to mario is higher obstacle
         return gameObjects.some(function (o) {
             return (o.y - mario.getAttr('y') - 150) < 0 && // bottom of mario equal to bottom of obstacle
-                (o.y - mario.getAttr('y') - 150) > -35 &&
+                (o.y - mario.getAttr('y') - 150) > -65 &&
                 mario.getAttr('x') + 50 >= o.x &&      // Left side of mario compared to Right side of obstacle
                 mario.getAttr('x') < o.x + o.width - 10; // Right side of mario compared to Left side of obstacle
+        });
+    }
+
+    function nextIsTube() {  
+        return gameObjects.some(function (o) {
+            return (o.y - mario.getAttr('y') - 150) < 0 && 
+                (o.y - mario.getAttr('y') - 150) > -65 &&
+                mario.getAttr('x') + 50 >= o.x &&      
+                mario.getAttr('x') < o.x + o.width - 10 &&
+                o.type === 'pipeSmall'; 
         });
     }
 
