@@ -138,6 +138,7 @@ marioImageObj.onload = function () {
         if (ev.keyCode === 39 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('walkRight');
             mario.direction = 'right';
+            window.scrollBy(5, 0);
         } else if (ev.keyCode === 34 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('jumpRight');
             mario.direction = 'right';
@@ -149,6 +150,7 @@ marioImageObj.onload = function () {
             mario.direction = 'right';
         } else if ((ev.keyCode === 37 && mario.getAttr('x') >= 8)) {
             mario.direction = 'left';
+            window.scrollBy(-5, 0);
             if (mario.animation() !== 'stayLeft') {
                 mario.animation('stayLeft');
             } else {
