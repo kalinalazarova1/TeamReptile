@@ -248,10 +248,12 @@ marioImageObj.onload = function () {
 
                 // if mario dead 
                 if (remainingLives === -1) {
-                    remainingLives = 0; //number to show on the screen
+                    remainingLivesField.setText(0); //number to show on the screen
+                    lives.draw(); //showing the number on the screen
+
                     endScreenLayer.draw();
                     document.body.removeEventListener('keydown', onKeyDown, false);
-                    alert('DEAD');
+                    gameOver();
                     //TODO: Stop the game; Display END screen; Ask for name and show highscores                    
                 }
 
@@ -297,4 +299,56 @@ function bonusAnimation(bonusX, bonusY) {
 function displayScore() {
     currentScoresField.setText(currentScores);
     score.draw();
+}
+
+function gameOver() {
+    var userName = prompt('Enter your name: ', 'unnamed');
+
+    var allScores = localStorage.getItem('scores');
+    if (!allScores) {
+        allScores = [];
+    } else {
+        allScores = JSON.parse(allScores);
+    }
+
+    if (allScores.length == 0) {
+        allScores.push({ name: userName, score: currentScores });
+    } else {
+        if (currentScores < allScores[allScores.length - 1].score) {
+            allScores.push({ name: userName, score: currentScores });
+        } else {
+            for (var i = 0; i < allScores.length; i++) {
+                if (allScores[i].score < currentScores) {
+                    allScores.splice(i, 0, { name: userName, score: currentScores });
+                    break;
+                }
+            }
+        }
+    }
+
+    localStorage.removeItem('scores');
+    localStorage.setItem('scores', JSON.stringify(allScores));
+    showScore();
+
+    // add the layer to the stage
+    stage.add(highScoresLayer);
+
+    function showScore() {
+        var scoresBoard = document.createElement('div');
+        var gameOverSign = document.createElement('div');
+        gameOverSign.innerHTML = 'HIGHSCORES TABLE';
+        scoresBoard.appendChild(gameOverSign);
+
+        var listScores = document.createElement('ol');
+        for (var i = 0; i < allScores.length; i++) {
+            var currLI = document.createElement('li');
+            currLI.innerHTML = allScores[i].name + " --> " + allScores[i].score;
+            listScores.appendChild(currLI);
+        }
+
+        scoresBoard.appendChild(listScores);
+        document.body.appendChild(scoresBoard);
+    }
+
+    return false;
 }
