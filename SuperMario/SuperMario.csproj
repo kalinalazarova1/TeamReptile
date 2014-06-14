@@ -82,6 +82,7 @@
     <Content Include="js\lives.js" />
     <Content Include="js\mario.js" />
     <Content Include="js\scores.js" />
+    <Content Include="js\start-end-screens.js" />
     <Content Include="js\timer.js" />
     <Content Include="Lib\countdown.min.js" />
     <Content Include="Images\042.jpg" />
