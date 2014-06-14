@@ -226,11 +226,12 @@ marioImageObj.onload = function () {
         for (k = 0; k < enemies.length; k++) {
             if (mario.getAttr('x') + 50 >= enemies[k].getAttr('x') &&
                 mario.getAttr('x') + 20 < enemies[k].getAttr('x') &&
-                (mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight')) {
-                enemies[k].animation('smashed');            // TODO: Write a function to modify the behaviour of smashed enemies[k]
+                (mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft')) {
+                enemies[k].animation('smashed');           
             } else if (mario.getAttr('x') + 50 >= enemies[k].getAttr('x') &&
                 mario.getAttr('x') + 30 < enemies[k].getAttr('x') &&
-                !(mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight')) {
+                !(mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft') &&
+                enemies[k].animation() !== 'smashed') {
                 console.log('Mario is eaten!');
                 mario.move({
                     x: - mario.getAttr('x') + 8,
