@@ -243,7 +243,12 @@ marioImageObj.onload = function () {
                 remainingLives--;
                 remainingLivesField.setText(remainingLives);
                 lives.draw();
+
+                // if mario dead 
                 if (remainingLives === -1) {
+                    remainingLives = 0; //number to show on the screen
+                    endScreenLayer.draw();
+                    document.body.removeEventListener('keydown', onKeyDown, false);
                     alert('DEAD');
                     //TODO: Stop the game; Display END screen; Ask for name and show highscores                    
                 }
