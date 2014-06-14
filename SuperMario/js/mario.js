@@ -1,5 +1,4 @@
-﻿/// <reference path="scores.js" />
-var marioLayer = new Kinetic.Layer();
+﻿var marioLayer = new Kinetic.Layer();
 var canvas = document.getElementById('container');
 var mario;
 var marioImageObj = new Image();
@@ -211,9 +210,10 @@ marioImageObj.onload = function () {
                             gameObjects[k].type === 'bonusBlock') {
 
                             bonusAnimation(gameObjects[k].x, gameObjects[k].y);
-                            console.log('hit bonus!');
+                            currentScores += 30;
+                            displayScore();
                             // TODO: Write a function to modify the behaviour of the hit bonus block
-                        }                                   // TODO: Add coins and scoring - calculation and display
+                        }                                   // TODO: Add coins and scoring - calculation and display - DONE
                     }                                       // TODO: Save 5 best scores starting and closing texts
                 }
                 isStuck = false;
@@ -227,7 +227,9 @@ marioImageObj.onload = function () {
             if (mario.getAttr('x') + 50 >= enemies[k].getAttr('x') &&
                 mario.getAttr('x') + 20 < enemies[k].getAttr('x') &&
                 (mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft')) {
-                enemies[k].animation('smashed');           
+                enemies[k].animation('smashed');
+                currentScores += 50;
+                displayScore();
             } else if (mario.getAttr('x') + 50 >= enemies[k].getAttr('x') &&
                 mario.getAttr('x') + 30 < enemies[k].getAttr('x') &&
                 !(mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft') &&
@@ -238,6 +240,15 @@ marioImageObj.onload = function () {
                     y: 0
                 });
                 // TODO: Write a function to reduce the lifes of Mario and modify the behaviour of Mario
+                remainingLives--;
+                remainingLivesField.setText(remainingLives);
+                lives.draw();
+                if (remainingLives === -1) {
+                    alert('DEAD');
+                    //TODO: Stop the game; Display END screen; Ask for name and show highscores                    
+                }
+
+
                 mario.animation('dead');
             }
         }
@@ -274,4 +285,9 @@ function bonusAnimation(bonusX, bonusY) {
     coinsLayer.add(coin);
     coin.start();
     stage.add(coinsLayer);
+}
+
+function displayScore() {
+    currentScoresField.setText(currentScores);
+    score.draw();
 }

@@ -14,7 +14,7 @@ var staticTimeString = new Kinetic.Text({
 });
 timeTextLayer.add(staticTimeString);
 
-var scoresCount = new Kinetic.Text({
+var timeText = new Kinetic.Text({
     x: 723,
     y: 30,
     text: remainingTime,
@@ -22,7 +22,7 @@ var scoresCount = new Kinetic.Text({
     fontFamily: 'Arial Black',
     fill: 'white'
 });
-timeTextLayer.add(scoresCount);
+timeTextLayer.add(timeText);
 
 stage.add(timeTextLayer);
 
@@ -32,7 +32,7 @@ setInterval(function () {
     }
     else {
         remainingTime--;
-        scoresCount.setText(remainingTime);
+        timeText.setText(remainingTime);
         timeTextLayer.draw();
     }
 }, 1000);
