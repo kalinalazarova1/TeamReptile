@@ -67,6 +67,9 @@
   <ItemGroup>
     <Content Include="Images\background1.jpg" />
     <Content Include="Images\game-objects\bonus-block.gif" />
+    <Content Include="Images\game-objects\end-level.png" />
+    <Content Include="Images\game-objects\pipe-big.png" />
+    <Content Include="Images\game-objects\pipe-small.png" />
     <Content Include="Images\game-objects\single-block.gif" />
     <Content Include="Images\game-objects\stairs.png" />
     <Content Include="Images\game-objects\static-block.gif" />
