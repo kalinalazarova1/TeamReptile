@@ -1,7 +1,7 @@
 ﻿
     var stage = new Kinetic.Stage({
         container: 'container',
-        width: 1000,
+        width: 2000,
         height: 600
     });
 
