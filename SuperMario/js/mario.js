@@ -1,4 +1,5 @@
-﻿var marioLayer = new Kinetic.Layer();
+﻿/// <reference path="scores.js" />
+var marioLayer = new Kinetic.Layer();
 var canvas = document.getElementById('container');
 var mario;
 var marioImageObj = new Image();
@@ -212,7 +213,8 @@ marioImageObj.onload = function () {
                 mario.move({
                     x: - mario.getAttr('x') + 8,
                     y: 0
-                });                                // TODO: Write a function to reduce the lifes of Mario and modify the behaviour of Mario
+                });
+                // TODO: Write a function to reduce the lifes of Mario and modify the behaviour of Mario
                 mario.animation('dead');
             }
         }
