@@ -1,4 +1,5 @@
-﻿/// <reference path="D:\Documents\GitHub\TeamReptile\SuperMario\Lib/kinetic.min.js" />
+﻿/// <reference path="Lib/kinetic.min.js" />
+/// <reference path="timer.js" />
 var startLiveCount = 3;
 var remainingLives = startLiveCount;
 
@@ -25,7 +26,7 @@ var remainingLivesField = new Kinetic.Text({
 lives.add(livesTextField);
 lives.add(remainingLivesField);
 
-stage.add(lives);
+scoreboardStage.add(lives);
 
 function die() {
     remainingLives -= 1;

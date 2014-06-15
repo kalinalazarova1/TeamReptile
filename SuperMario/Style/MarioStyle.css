@@ -11,3 +11,10 @@ svg {
     svg image {
         /*opacity:0.4;*/
     }
+
+div#scoreboard{
+    position: fixed;
+    left: 0;
+    top: 20px;
+    z-index: 100;
+}

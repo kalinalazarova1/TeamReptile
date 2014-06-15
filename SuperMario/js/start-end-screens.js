@@ -24,8 +24,6 @@ startScreen.onload = function () {
     }, 4000);
 };
 
-
-
 var end = new Kinetic.Image({
     x: 400,
     y: 20,

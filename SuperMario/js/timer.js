@@ -24,11 +24,17 @@ var timeText = new Kinetic.Text({
 });
 timeTextLayer.add(timeText);
 
-stage.add(timeTextLayer);
+var scoreboardStage = new Kinetic.Stage({
+    container: 'scoreboard',
+    width: 2000,
+    height: 600
+});
+
+scoreboardStage.add(timeTextLayer);
 
 setInterval(function () {
     if (totalTimerPerLevel <= 0) {
-        //TODO: Call no time left screen
+        timeText.setText('NO TIME LEFT!!!');
     }
     else {
         remainingTime--;

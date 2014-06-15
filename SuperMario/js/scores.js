@@ -27,4 +27,4 @@ var currentScoresField = new Kinetic.Text({
 score.add(scoresTextField);
 score.add(currentScoresField);
 
-stage.add(score);
+scoreboardStage.add(score);
