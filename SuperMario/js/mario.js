@@ -253,7 +253,20 @@ marioImageObj.onload = function () {
                 enemies[k].animation('smashed');
                 currentScores += 50;
                 displayScore();
-            } 
+            } else if (mario.getAttr('x') + 50 >= enemies[k].getAttr('x') &&
+                mario.getAttr('x') + 30 < enemies[k].getAttr('x') &&
+                !(mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft') &&
+                enemies[k].animation() !== 'smashed') {
+                console.log('Mario is eaten!');
+                mario.move({
+                    x: -mario.getAttr('x') + 8,
+                    y: 0
+                });
+                window.scrollTo(0, 0);
+                remainingLives--;
+                remainingLivesField.setText(remainingLives);
+                lives.draw();
+            }
             // if mario dead 
             if (remainingLives === -1) {
                 remainingLivesField.setText(0); //number to show on the screen
@@ -264,6 +277,9 @@ marioImageObj.onload = function () {
                 stopTime = true;
                 gameOver();                  
             }
+	        currentScores = 0; //null the scores 
+            displayScore(); //display the nulled scores
+            mario.animation('dead');
         }
     }
 
