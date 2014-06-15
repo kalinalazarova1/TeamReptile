@@ -32,7 +32,7 @@ var end = new Kinetic.Image({
     height: 400
 });
 endScreenLayer.add(end);
-stage.add(endScreenLayer);
+scoreboardStage.add(endScreenLayer);
 
 endScreen.src = 'Images/screens/screen-game-over.png';
 startScreen.src = 'Images/screens/screen-start.png';
