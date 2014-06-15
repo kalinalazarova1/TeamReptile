@@ -1,4 +1,4 @@
-﻿//timer
+﻿/// <reference path="mario.js" />
 var totalTimerPerLevel = 999;
 
 var remainingTime = totalTimerPerLevel;
@@ -37,7 +37,9 @@ setInterval(function () {
         timeText.setText('NO TIME LEFT!!!');
     }
     else {
-        remainingTime--;
+        if (!stopTime) {
+            remainingTime--;
+        }
         timeText.setText(remainingTime);
         timeTextLayer.draw();
     }

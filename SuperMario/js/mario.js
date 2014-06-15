@@ -1,6 +1,7 @@
 ﻿var marioLayer = new Kinetic.Layer();
 var canvas = document.getElementById('container');
 var mario;
+var stopTime = false;
 var marioImageObj = new Image();
 
 marioImageObj.onload = function () {
@@ -150,18 +151,24 @@ marioImageObj.onload = function () {
         if (ev.keyCode === 39 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('walkRight');
             mario.direction = 'right';
-            window.scrollBy(5, 0);
+            if (mario.getAttr('x') > 200) {
+                window.scrollBy(5, 0);
+            }
         } else if (ev.keyCode === 34 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('jumpRight');
             mario.direction = 'right';
-            window.scrollBy(10, 0);
+            if (mario.getAttr('x') > 200) {
+                window.scrollBy(10, 0);
+            }
         } else if (ev.keyCode === 33 && mario.getAttr('x') >= 32) {
             mario.animation('jumpLeft');
             mario.direction = 'left';
         } else if (ev.keyCode === 38 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('bigJumpRight');
             mario.direction = 'right';
-            window.scrollBy(10, 0);
+            if (mario.getAttr('x') > 200) {
+                window.scrollBy(10, 0);
+            }
         } else if ((ev.keyCode === 37 && mario.getAttr('x') >= 8)) {
             mario.direction = 'left';
             if (mario.animation() !== 'stayLeft') {
@@ -173,6 +180,8 @@ marioImageObj.onload = function () {
         if (mario.getAttr('x') > 1950) {        // if mario successfully reached the end of the level
             endScreenLayer.draw();
             document.body.removeEventListener('keydown', onKeyDown, false);
+            scrollTo(0, 0);
+            stopTime = true;
             gameOver();
         }
         collisionDispatcher();
@@ -266,6 +275,7 @@ marioImageObj.onload = function () {
 
                     endScreenLayer.draw();
                     document.body.removeEventListener('keydown', onKeyDown, false);
+                    stopTime = true;
                     gameOver();                  
                 }
                 mario.animation('dead');
