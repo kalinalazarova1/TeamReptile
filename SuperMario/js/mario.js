@@ -277,6 +277,8 @@ marioImageObj.onload = function () {
                     stopTime = true;
                     gameOver();                  
                 }
+                currentScores = 0; //null the scores 
+                displayScore(); //display the nulled scores
                 mario.animation('dead');
             }
         }
@@ -347,26 +349,33 @@ function gameOver() {
 
     localStorage.removeItem('scores');
     localStorage.setItem('scores', JSON.stringify(allScores));
-    showScore();
 
-    // add the layer to the stage
+    var highScoresLayer = new Kinetic.Layer();
+    var highScores = new Kinetic.Text({
+        x: 900,
+        y: 100,
+        text: "scores",
+        fontSize: 25,
+        fontFamily: 'Arial Black',
+        fill: 'white'
+    });
+
+    highScoresLayer.add(highScores);
     stage.add(highScoresLayer);
+    showScore();//display the highScores
 
     function showScore() {
-        var scoresBoard = document.createElement('div');
-        var gameOverSign = document.createElement('div');
-        gameOverSign.innerHTML = 'HIGHSCORES TABLE';
-        scoresBoard.appendChild(gameOverSign);
+        var highScoresText = 'HIGHSCORES TABLE \n\n'
 
-        var listScores = document.createElement('ol');
+        if (allScores.length > 10) {
+            allScores.length = 10;
+        }
         for (var i = 0; i < allScores.length; i++) {
-            var currLI = document.createElement('li');
-            currLI.innerHTML = allScores[i].name + " --> " + allScores[i].score;
-            listScores.appendChild(currLI);
+            highScoresText += allScores[i].name + " --> " + allScores[i].score + '\n';
         }
 
-        scoresBoard.appendChild(listScores);
-        document.body.appendChild(scoresBoard);
+        highScores.setText(highScoresText);
+        highScoresLayer.draw();
     }
 
     return false;
