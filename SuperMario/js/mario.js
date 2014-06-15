@@ -11,8 +11,6 @@ marioImageObj.onload = function () {
         animation: 'stayRight',
         animations: {
             walkRight: [
-              // x, y, width, height (2 frames)
-              //0, 0, 50, 150,
               50, 0, 50, 150
             ],
             stayRight: [
@@ -59,16 +57,30 @@ marioImageObj.onload = function () {
             })[0];
             if (next) {     // if next to mario there is an obstacle
                 var old = mario.getAttr('y');
-                mario.move({
-                    x: 8,
-                    y: next.y - mario.getAttr('y') - 150
-                });
+                if (mario.direction === 'right') {
+                    mario.move({
+                        x: 8,
+                        y: next.y - mario.getAttr('y') - 150
+                    });
+                } else {
+                    mario.move({
+                        x: -8,
+                        y: next.y - mario.getAttr('y') - 150
+                    });
+                }
                 elevation -= (mario.getAttr('y') - old) / 32;
             } else {        // if next to mario there is no obstacle
-                mario.move({
-                    x: 8,
-                    y: 32 * elevation
-                });
+                if (mario.direction === 'right') {
+                    mario.move({
+                        x: 8,
+                        y: 32 * elevation
+                    });
+                } else {
+                    mario.move({
+                        x: -8,
+                        y: 32 * elevation
+                    });
+                }
                 elevation = 0;
             }
         }
@@ -82,10 +94,12 @@ marioImageObj.onload = function () {
             mario.animation('stayRight');
             frameCount = 0;
         } else if ((mario.animation() === 'walkLeft') && ++frameCount > 2) {
-            mario.move({
-                x: -8,
-                y: 0
-            });
+            if (!isStuck) {
+                mario.move({
+                    x: -8,
+                    y: 0
+                });
+            }
             mario.animation('stayLeft');
             frameCount = 0;
         }
@@ -94,7 +108,7 @@ marioImageObj.onload = function () {
                 x: 32,
                 y: 0
             });
-            if (isElevated && nextIsTube()) {
+            if (isElevated && nextIsSmallPipe()) {
                 mario.move({
                     x: 0,
                     y: -64
@@ -109,14 +123,12 @@ marioImageObj.onload = function () {
             }
             mario.animation('stayRight');
             frameCount = 0;
-            console.log(mario.getAttr('x'));
-            console.log(mario.getAttr('y'));
         } else if (mario.animation() === 'jumpLeft' && ++frameCount > 2) {
             mario.move({
                 x: -32,
                 y: 0
             });
-            if (isElevated && nextIsTube()) {
+            if (isElevated && nextIsSmallPipe()) {
                 mario.move({
                     x: 0,
                     y: -64
@@ -152,14 +164,13 @@ marioImageObj.onload = function () {
             window.scrollBy(10, 0);
         } else if ((ev.keyCode === 37 && mario.getAttr('x') >= 8)) {
             mario.direction = 'left';
-            window.scrollBy(-5, 0);
             if (mario.animation() !== 'stayLeft') {
                 mario.animation('stayLeft');
             } else {
                 mario.animation('walkLeft');
             }
         }
-        if (mario.getAttr('x') > 1950) {
+        if (mario.getAttr('x') > 1950) {        // if mario successfully reached the end of the level
             endScreenLayer.draw();
             document.body.removeEventListener('keydown', onKeyDown, false);
             gameOver();
@@ -180,7 +191,7 @@ marioImageObj.onload = function () {
         });
     }
 
-    function nextIsTube() {
+    function nextIsSmallPipe() {
         return gameObjects.some(function (o) {
             return (o.y - mario.getAttr('y') - 150) < 0 &&
                 (o.y - mario.getAttr('y') - 150) > -65 &&
@@ -205,31 +216,26 @@ marioImageObj.onload = function () {
     function collisionDispatcher() {
         var k;
         for (k = 0; k < gameObjects.length; k++) {
-            if (mario.direction === 'right') {
-                if (isMarioXInObstacle(gameObjects[k])) {
-                    if ((mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight') && nextIsHigher()) { // trying to jumpRight over obstacle
-                        isElevated = true;
-                        return;
-                    } else if (nextIsHigher()) {
-                        isStuck = true;                     // trying to enter obstacle
-                        return;
-                    } else if (mario.animation() === 'bigJumpRight') {
-                        if (mario.getAttr('y') - gameObjects[k].y + 32 < 105 &&
-                            Math.abs(mario.getAttr('x') + 25 - gameObjects[k].x) - 16 < 5 &&
-                            gameObjects[k].type === 'bonusBlock') {
+            if (isMarioXInObstacle(gameObjects[k])) {
+                if ((mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft') && nextIsHigher()) { // trying to jumpRight over obstacle
+                    isElevated = true;
+                    return;
+                } else if (nextIsHigher()) {
+                    isStuck = true;                     // trying to enter obstacle
+                    return;
+                } else if (mario.animation() === 'bigJumpRight') {
+                    if (mario.getAttr('y') - gameObjects[k].y + 32 < 105 &&
+                        Math.abs(mario.getAttr('x') + 25 - gameObjects[k].x) - 16 < 5 &&
+                        gameObjects[k].type === 'bonusBlock') {
 
-                            bonusAnimation(gameObjects[k].x, gameObjects[k].y);
-                            currentScores += 30;
-                            displayScore();
-                            // TODO: Write a function to modify the behaviour of the hit bonus block
-                        }                                   // TODO: Add coins and scoring - calculation and display - DONE
-                    }                                       // TODO: Save 5 best scores starting and closing texts
+                        bonusAnimation(gameObjects[k].x, gameObjects[k].y);
+                        currentScores += 30;
+                        displayScore();
+                    }
                 }
-                isStuck = false;
-                isElevated = false;
-            } else {
-                // TODO: Collision detection walking left;
             }
+            isStuck = false;
+            isElevated = false;
         }
 
         for (k = 0; k < enemies.length; k++) {
@@ -249,7 +255,6 @@ marioImageObj.onload = function () {
                     y: 0
                 });
                 window.scrollTo(0, 0);
-                // TODO: Write a function to reduce the lifes of Mario and modify the behaviour of Mario
                 remainingLives--;
                 remainingLivesField.setText(remainingLives);
                 lives.draw();
@@ -261,11 +266,8 @@ marioImageObj.onload = function () {
 
                     endScreenLayer.draw();
                     document.body.removeEventListener('keydown', onKeyDown, false);
-                    gameOver();
-                    //TODO: Stop the game; Display END screen; Ask for name and show highscores                    
+                    gameOver();                  
                 }
-
-
                 mario.animation('dead');
             }
         }
