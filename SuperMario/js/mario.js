@@ -266,20 +266,21 @@ marioImageObj.onload = function () {
                 remainingLives--;
                 remainingLivesField.setText(remainingLives);
                 lives.draw();
-            }
-            // if mario dead 
-            if (remainingLives === -1) {
-                remainingLivesField.setText(0); //number to show on the screen
-                lives.draw(); //showing the number on the screen
 
-                endScreenLayer.draw();
-                document.body.removeEventListener('keydown', onKeyDown, false);
-                stopTime = true;
-                gameOver();                  
+                // if mario dead 
+                if (remainingLives === -1) {
+                    remainingLivesField.setText(0); //number to show on the screen
+                    lives.draw(); //showing the number on the screen
+
+                    endScreenLayer.draw();
+                    document.body.removeEventListener('keydown', onKeyDown, false);
+                    stopTime = true;
+                    gameOver();                  
+                }
+                currentScores = 0; //null the scores 
+                displayScore(); //display the nulled scores
+                mario.animation('dead');
             }
-	        currentScores = 0; //null the scores 
-            displayScore(); //display the nulled scores
-            mario.animation('dead');
         }
     }
 
