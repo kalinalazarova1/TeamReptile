@@ -114,4 +114,3 @@ var sources = {
 };
 
 loadImages(sources, buildStage);
-
