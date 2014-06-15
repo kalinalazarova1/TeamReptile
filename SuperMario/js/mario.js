@@ -142,12 +142,15 @@ marioImageObj.onload = function () {
         } else if (ev.keyCode === 34 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('jumpRight');
             mario.direction = 'right';
+            window.scrollBy(10, 0);
         } else if (ev.keyCode === 33 && mario.getAttr('x') >= 32) {
             mario.animation('jumpLeft');
             mario.direction = 'left';
+            window.scrollBy(-10, 0);
         } else if (ev.keyCode === 38 && mario.getAttr('x') <= canvas.getAttribute('width') - 70) {
             mario.animation('bigJumpRight');
             mario.direction = 'right';
+            window.scrollBy(10, 0);
         } else if ((ev.keyCode === 37 && mario.getAttr('x') >= 8)) {
             mario.direction = 'left';
             window.scrollBy(-5, 0);
@@ -155,7 +158,13 @@ marioImageObj.onload = function () {
                 mario.animation('stayLeft');
             } else {
                 mario.animation('walkLeft');
+                window.scrollBy(-5, 0);
             }
+        }
+        if (mario.getAttr('x') > 1950) {
+            endScreenLayer.draw();
+            document.body.removeEventListener('keydown', onKeyDown, false);
+            gameOver();
         }
         collisionDispatcher();
     }
@@ -241,6 +250,7 @@ marioImageObj.onload = function () {
                     x: -mario.getAttr('x') + 8,
                     y: 0
                 });
+                window.scrollTo(0, 0);
                 // TODO: Write a function to reduce the lifes of Mario and modify the behaviour of Mario
                 remainingLives--;
                 remainingLivesField.setText(remainingLives);
