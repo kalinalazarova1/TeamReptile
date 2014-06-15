@@ -48,8 +48,12 @@ marioImageObj.onload = function () {
     mario.start();
 
     var frameCount = 0;
-
+    var frames = 0;
     mario.on('frameIndexChange', function (evt) {
+        frames++;
+        if (frames % 7 === 0) {
+            collisionDispatcher();
+        }
         if (!isElevated && elevation !== 0 && !nextIsFlat()) {
             var next = gameObjects.filter(function (o) {
                 return (o.y - mario.getAttr('y') - 150) > 0 && // bottom of mario higher than top of obstacle
@@ -218,7 +222,13 @@ marioImageObj.onload = function () {
     }
 
     function isMarioXInObstacle(obstacle) {
-        return mario.getAttr('x') + 50 >= obstacle.x && mario.getAttr('x') < obstacle.x + obstacle.width - 5;
+        return mario.getAttr('x') + 50 >= obstacle.x && mario.getAttr('x') < obstacle.x + obstacle.width - 10;
+    }
+
+    function isMarioOverMushroom(mushroom) {
+        return mario.getAttr('x') + 50 >= mushroom.getAttr('x') &&
+                mario.getAttr('x') < mushroom.getAttr('x') &&
+                mario.getAttr('y') + 150 > mushroom.getAttr('y');
     }
 
     function collisionDispatcher() {
@@ -247,14 +257,12 @@ marioImageObj.onload = function () {
         }
 
         for (k = 0; k < enemies.length; k++) {
-            if (mario.getAttr('x') + 50 >= enemies[k].getAttr('x') &&
-                mario.getAttr('x') + 20 < enemies[k].getAttr('x') &&
+            if (isMarioOverMushroom(enemies[k]) &&
                 (mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft')) {
                 enemies[k].animation('smashed');
                 currentScores += 50;
                 displayScore();
-            } else if (mario.getAttr('x') + 50 >= enemies[k].getAttr('x') &&
-                mario.getAttr('x') + 30 < enemies[k].getAttr('x') &&
+            } else if (isMarioOverMushroom(enemies[k]) &&
                 !(mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft') &&
                 enemies[k].animation() !== 'smashed') {
                 console.log('Mario is eaten!');
@@ -275,7 +283,7 @@ marioImageObj.onload = function () {
                     endScreenLayer.draw();
                     document.body.removeEventListener('keydown', onKeyDown, false);
                     stopTime = true;
-                    gameOver();                  
+                    gameOver();
                 }
                 currentScores = 0; //null the scores 
                 displayScore(); //display the nulled scores
