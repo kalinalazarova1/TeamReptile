@@ -365,13 +365,13 @@ function gameOver() {
     showScore();//display the highScores
 
     function showScore() {
-        var highScoresText = 'HIGHSCORES TABLE \n\n'
+        var highScoresText = 'HIGHSCORES TABLE \n\n';
 
         if (allScores.length > 10) {
             allScores.length = 10;
         }
         for (var i = 0; i < allScores.length; i++) {
-            highScoresText += allScores[i].name + " --> " + allScores[i].score + '\n';
+            highScoresText += (i + 1) + '. ' + allScores[i].name + " --> " + allScores[i].score + '\n';
         }
 
         highScores.setText(highScoresText);
