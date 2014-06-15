@@ -197,6 +197,21 @@ function Move(mushroom, startBorder, endBorder) {
         if (mushroom.animation() === 'smashed') {
             clearInterval(timer);
         }
+        if ((mario.getAttr('x') + 50 >= mushroom.getAttr('x') && mario.getAttr('y') === mushroom.getAttr('y') - 124) &&
+                (mario.getAttr('x') + 30 < mushroom.getAttr('x')  && mario.getAttr('y') === mushroom.getAttr('y') - 124) &&
+                !(mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight' || mario.animation() === 'jumpLeft') &&
+                mushroom.animation() !== 'smashed') {
+            mario.move({
+                x: -mario.getAttr('x') + 8,
+                y: 0
+            });
+
+            window.scrollTo(0, 0);
+            remainingLives--;
+            remainingLivesField.setText(remainingLives);
+            lives.draw();
+            mario.animation('dead');
+        }
         if (mushroom.getAttr('x') < boundary) {
             mushroom.move({
                 x: 5
