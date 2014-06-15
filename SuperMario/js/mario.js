@@ -70,7 +70,7 @@ marioImageObj.onload = function () {
                     y: 32 * elevation
                 });
                 elevation = 0;
-            }   
+            }
         }
         if ((mario.animation() === 'walkRight') && ++frameCount > 2) {
             if (!isStuck) {
@@ -82,10 +82,10 @@ marioImageObj.onload = function () {
             mario.animation('stayRight');
             frameCount = 0;
         } else if ((mario.animation() === 'walkLeft') && ++frameCount > 2) {
-                mario.move({
-                    x: -8,
-                    y: 0
-                });
+            mario.move({
+                x: -8,
+                y: 0
+            });
             mario.animation('stayLeft');
             frameCount = 0;
         }
@@ -173,13 +173,13 @@ marioImageObj.onload = function () {
         });
     }
 
-    function nextIsTube() {  
+    function nextIsTube() {
         return gameObjects.some(function (o) {
-            return (o.y - mario.getAttr('y') - 150) < 0 && 
+            return (o.y - mario.getAttr('y') - 150) < 0 &&
                 (o.y - mario.getAttr('y') - 150) > -65 &&
-                mario.getAttr('x') + 50 >= o.x &&      
+                mario.getAttr('x') + 50 >= o.x &&
                 mario.getAttr('x') < o.x + o.width - 10 &&
-                o.type === 'pipeSmall'; 
+                o.type === 'pipeSmall';
         });
     }
 
@@ -238,15 +238,22 @@ marioImageObj.onload = function () {
                 enemies[k].animation() !== 'smashed') {
                 console.log('Mario is eaten!');
                 mario.move({
-                    x: - mario.getAttr('x') + 8,
+                    x: -mario.getAttr('x') + 8,
                     y: 0
                 });
                 // TODO: Write a function to reduce the lifes of Mario and modify the behaviour of Mario
                 remainingLives--;
                 remainingLivesField.setText(remainingLives);
                 lives.draw();
+
+                // if mario dead 
                 if (remainingLives === -1) {
-                    alert('DEAD');
+                    remainingLivesField.setText(0); //number to show on the screen
+                    lives.draw(); //showing the number on the screen
+
+                    endScreenLayer.draw();
+                    document.body.removeEventListener('keydown', onKeyDown, false);
+                    gameOver();
                     //TODO: Stop the game; Display END screen; Ask for name and show highscores                    
                 }
 
@@ -266,7 +273,7 @@ function bonusAnimation(bonusX, bonusY) {
     var coinImage = new Image();
     coinImage.src = 'Images/game-objects/coin.png';
     var coin = new Kinetic.Sprite({
-        x: bonusX+8,
+        x: bonusX + 8,
         y: bonusY - 32,
         image: coinImage,
         animation:
@@ -283,7 +290,7 @@ function bonusAnimation(bonusX, bonusY) {
         frameRate: 4,
         frameIndex: 0
     });
-    
+
     coinsLayer.add(coin);
     coin.start();
     stage.add(coinsLayer);
@@ -292,4 +299,56 @@ function bonusAnimation(bonusX, bonusY) {
 function displayScore() {
     currentScoresField.setText(currentScores);
     score.draw();
+}
+
+function gameOver() {
+    var userName = prompt('Enter your name: ', 'unnamed');
+
+    var allScores = localStorage.getItem('scores');
+    if (!allScores) {
+        allScores = [];
+    } else {
+        allScores = JSON.parse(allScores);
+    }
+
+    if (allScores.length == 0) {
+        allScores.push({ name: userName, score: currentScores });
+    } else {
+        if (currentScores < allScores[allScores.length - 1].score) {
+            allScores.push({ name: userName, score: currentScores });
+        } else {
+            for (var i = 0; i < allScores.length; i++) {
+                if (allScores[i].score < currentScores) {
+                    allScores.splice(i, 0, { name: userName, score: currentScores });
+                    break;
+                }
+            }
+        }
+    }
+
+    localStorage.removeItem('scores');
+    localStorage.setItem('scores', JSON.stringify(allScores));
+    showScore();
+
+    // add the layer to the stage
+    stage.add(highScoresLayer);
+
+    function showScore() {
+        var scoresBoard = document.createElement('div');
+        var gameOverSign = document.createElement('div');
+        gameOverSign.innerHTML = 'HIGHSCORES TABLE';
+        scoresBoard.appendChild(gameOverSign);
+
+        var listScores = document.createElement('ol');
+        for (var i = 0; i < allScores.length; i++) {
+            var currLI = document.createElement('li');
+            currLI.innerHTML = allScores[i].name + " --> " + allScores[i].score;
+            listScores.appendChild(currLI);
+        }
+
+        scoresBoard.appendChild(listScores);
+        document.body.appendChild(scoresBoard);
+    }
+
+    return false;
 }
