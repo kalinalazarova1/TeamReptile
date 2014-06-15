@@ -103,8 +103,7 @@ marioImageObj.onload = function () {
             }
             mario.animation('stayLeft');
             frameCount = 0;
-        }
-        else if ((mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight') && ++frameCount > 2) {
+        } else if ((mario.animation() === 'jumpRight' || mario.animation() === 'bigJumpRight') && ++frameCount > 2) {
             mario.move({
                 x: 32,
                 y: 0
@@ -331,7 +330,7 @@ function gameOver() {
         allScores = JSON.parse(allScores);
     }
 
-    if (allScores.length == 0) {
+    if (allScores.length === 0) {
         allScores.push({ name: userName, score: currentScores });
     } else {
         if (currentScores < allScores[allScores.length - 1].score) {
